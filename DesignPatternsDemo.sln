@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatternsDemo", "DesignPatternsDemo\DesignPatternsDemo.csproj", "{C98836F9-2AD6-473D-B461-76C2D6BDE485}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{E9A7163A-114B-4615-B8D6-A45C7E72EA9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factory", "CharacterFactory\Factory.csproj", "{8EF50283-3CC8-467A-B9D8-9364E3548ED5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +17,13 @@ Global
 		{C98836F9-2AD6-473D-B461-76C2D6BDE485}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C98836F9-2AD6-473D-B461-76C2D6BDE485}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C98836F9-2AD6-473D-B461-76C2D6BDE485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A7163A-114B-4615-B8D6-A45C7E72EA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A7163A-114B-4615-B8D6-A45C7E72EA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A7163A-114B-4615-B8D6-A45C7E72EA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A7163A-114B-4615-B8D6-A45C7E72EA9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EF50283-3CC8-467A-B9D8-9364E3548ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EF50283-3CC8-467A-B9D8-9364E3548ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EF50283-3CC8-467A-B9D8-9364E3548ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EF50283-3CC8-467A-B9D8-9364E3548ED5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
