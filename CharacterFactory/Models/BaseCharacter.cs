@@ -2,10 +2,11 @@
 
 namespace Factory.Models
 {
-    public class BaseCharacter : ICharacter
+    public abstract class BaseCharacter : ICharacter
     {
         int hitPoints;
         string name;
+        protected CharacterType characterType;
 
         public BaseCharacter(int hitPoints, string name)
         {
@@ -13,14 +14,21 @@ namespace Factory.Models
             this.name = name;
         }
 
-        public int getHitPoints()
+        public int GetHitPoints()
         {
             return hitPoints;
         }
 
-        public string getName()
+        public string GetName()
         {
             return name;
         }
+
+        public CharacterType GetCharacterType()
+        {
+            return this.characterType;
+        }
+
+        public abstract void UseSpecialPower();
     }
 }

@@ -2,7 +2,9 @@
 {
     public interface ICharacter
     {
-        int getHitPoints();
-        string getName();
+        int GetHitPoints();
+        string GetName();
+        void UseSpecialPower();
+        CharacterType GetCharacterType();
     }
 }

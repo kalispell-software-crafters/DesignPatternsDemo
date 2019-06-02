@@ -5,6 +5,10 @@
         Archer,
         Warrior,
         Healer,
-        Enemy
+        Enemy,
+        Cleric,
+        CrossBow,
+        Knight,
+        MegaEnemy
     }
 }
