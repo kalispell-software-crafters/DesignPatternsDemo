@@ -20,6 +20,14 @@ namespace DesignPatternsDemo
             UpgradeCharacter(party, CharacterType.Healer, characterUpgradeFactory);
             ListAllCharaters(party, enemies, "Upgraded list of characters.");
 
+            ICharacter warrior = party.First(character => character.GetCharacterType() == CharacterType.Warrior);
+            warrior.ReceiveDamage(90);
+            ICharacter archer = party.First(character => character.GetCharacterType() == CharacterType.Archer);
+            archer.ReceiveDamage(60);
+
+            Console.WriteLine($"Warrior's HP: {warrior.GetHitPoints()}");
+            Console.WriteLine($"Archer's HP: {archer.GetHitPoints()}");
+
             Console.WriteLine("Press enter to quit.");
             Console.ReadLine();
         }
@@ -27,9 +35,16 @@ namespace DesignPatternsDemo
         static List<ICharacter> CreateParty(ICharacterFactory characterFactory)
         {           
             List<ICharacter> party = new List<ICharacter>();
-            party.Add(characterFactory.CreateCharacter(CharacterType.Archer));
-            party.Add(characterFactory.CreateCharacter(CharacterType.Warrior));
-            party.Add(characterFactory.CreateCharacter(CharacterType.Healer));
+            ICharacter healer = characterFactory.CreateCharacter(CharacterType.Healer);
+            ICharacter warrior = characterFactory.CreateCharacter(CharacterType.Warrior);
+            ICharacter archer = characterFactory.CreateCharacter(CharacterType.Archer);
+            archer.AddObserver(healer);
+            warrior.AddObserver(healer);
+            healer.AddObserver(healer);
+            party.Add(archer);
+            party.Add(warrior);
+            party.Add(healer);
+
             return party;
         }
 
@@ -64,7 +79,6 @@ namespace DesignPatternsDemo
             character.UseSpecialPower();
             Console.WriteLine();
         }
-
 
         static void UpgradeCharacter(List<ICharacter> characters, CharacterType type, ICharacterUpgradeFactory upgradeFactory)
         {

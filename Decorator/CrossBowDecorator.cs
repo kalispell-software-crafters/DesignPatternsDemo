@@ -3,35 +3,30 @@ using Interfaces;
 
 namespace Decorator
 {
-    public class CrossBowDecorator : ICharacter
+    public class CrossBowDecorator : BaseCharacter
     {
         private ICharacter character;
-        private CharacterType characterType;
 
-        public CrossBowDecorator(ICharacter character)
+        public CrossBowDecorator(ICharacter character) : base(character.GetBaseHitPoints(), character.GetName())
         {
             this.character = character;
             this.characterType = CharacterType.CrossBow;
         }
 
-        public CharacterType GetCharacterType()
+        public override int GetBaseHitPoints()
         {
-            return characterType;
+            return this.character.GetBaseHitPoints() + 30;
         }
 
-        public int GetHitPoints()
+        public override void ReactToObservation(ICharacter character)
         {
-            return this.character.GetHitPoints() + 30;
+
         }
 
-        public string GetName()
-        {
-            return this.character.GetName();
-        }
-
-        public void UseSpecialPower()
+        public override void UseSpecialPower()
         {
             Console.WriteLine("The Cross Bow Archer fires at each enemy.");
         }
+
     }
 }
