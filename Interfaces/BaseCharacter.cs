@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
-using Interfaces;
 
 namespace Interfaces
 {
     public abstract class BaseCharacter : ICharacter
     {
-        private int currentHitPoints;
-        private readonly int baseHitPoints;
-        private string name;
         protected CharacterType characterType;
         protected List<ICharacter> observers = new List<ICharacter>();
+        private int currentHitPoints;
+        private readonly int baseHitPoints;
+        private readonly string name;
 
         public BaseCharacter(int hitPoints, string name)
         {
@@ -20,12 +19,12 @@ namespace Interfaces
 
         public virtual string GetName()
         {
-            return name;
+            return this.name;
         }
 
         public virtual int GetHitPoints()
         {
-            return currentHitPoints;
+            return this.currentHitPoints;
         }
 
         public virtual void SetHitPoints(int hitPoints)

@@ -2,16 +2,18 @@
 {
     public interface ICharacter
     {
+        int GetBaseHitPoints();
         int GetHitPoints();
         void SetHitPoints(int hitPoints);
-        int GetBaseHitPoints();
         void ReceiveDamage(int damageAmount);
+
         string GetName();
+        CharacterType GetCharacterType(); 
         void UseSpecialPower();
-        CharacterType GetCharacterType();
-        void ReactToObservation(ICharacter character);
+
         void AddObserver(ICharacter character);
         void RemoveObserver(ICharacter character);
         void NotifyObservers();
+        void ReactToObservation(ICharacter character);
     }
 }

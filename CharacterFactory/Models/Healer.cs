@@ -5,6 +5,9 @@ namespace Factory.Models
 {
     public class Healer : BaseCharacter
     {
+        private readonly int hitPointsToHeal = 40;
+        private readonly int hitPointThreshold = 50;
+
         public Healer(int hitPoints, string name) : base(hitPoints, name)
         {
             this.characterType = CharacterType.Healer;
@@ -18,11 +21,11 @@ namespace Factory.Models
         public override void ReactToObservation(ICharacter character) 
         {
             int currentHitPoints = character.GetHitPoints();
-            if (currentHitPoints <= 50)
+            if (currentHitPoints <= hitPointThreshold)
             {
-                int healedHitPoints = currentHitPoints + 40;
+                int healedHitPoints = currentHitPoints + hitPointsToHeal;
                 character.SetHitPoints(healedHitPoints);
-                Console.WriteLine($"{this.GetName()} healed {character.GetName()} 40 HP! From {currentHitPoints} to {healedHitPoints}!");
+                Console.WriteLine($"{this.GetName()} healed {character.GetName()} {hitPointsToHeal} HP! From {currentHitPoints} to {healedHitPoints}!");
             }
         }
     }
