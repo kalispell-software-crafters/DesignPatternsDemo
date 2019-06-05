@@ -32,6 +32,7 @@ namespace Decorator
         public override void UseSpecialPower()
         {
             Console.WriteLine("The Knight uses their sheild to protect the other party members.");
+            this.character.UseSpecialPower();
         }
     }
 }

@@ -32,6 +32,7 @@ namespace Decorator
         public override void UseSpecialPower()
         {
             Console.WriteLine("The Mega Enemy wounds all of the party members.");
+            this.character.UseSpecialPower();
         }
     }
 }

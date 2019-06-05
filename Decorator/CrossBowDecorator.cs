@@ -32,6 +32,7 @@ namespace Decorator
         public override void UseSpecialPower()
         {
             Console.WriteLine("The Cross Bow Archer fires at each enemy.");
+            this.character.UseSpecialPower();
         }
 
     }

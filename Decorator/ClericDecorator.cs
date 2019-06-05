@@ -31,6 +31,7 @@ namespace Decorator
         public override void UseSpecialPower()
         {
             Console.WriteLine("The Cleric uses their healing magic on all of the party members.");
+            this.character.UseSpecialPower();
         }
     }
 }
