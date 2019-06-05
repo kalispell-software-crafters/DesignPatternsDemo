@@ -5,9 +5,9 @@ namespace Interfaces
 {
     public abstract class BaseCharacter : ICharacter
     {
-        int currentHitPoints;
-        int baseHitPoints;
-        string name;
+        private int currentHitPoints;
+        private readonly int baseHitPoints;
+        private string name;
         protected CharacterType characterType;
         protected List<ICharacter> observers = new List<ICharacter>();
 

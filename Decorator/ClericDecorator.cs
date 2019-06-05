@@ -6,6 +6,7 @@ namespace Decorator
     public class ClericDecorator : BaseCharacter
     {
         private ICharacter character;
+        private readonly int hitPointIncrease = 25;
 
         public ClericDecorator(ICharacter character) : base(character.GetBaseHitPoints(), character.GetName())
         {
@@ -15,7 +16,12 @@ namespace Decorator
 
         public override int GetBaseHitPoints()
         {
-            return this.character.GetBaseHitPoints() + 25;
+            return this.character.GetBaseHitPoints() + hitPointIncrease;
+        }
+
+        public override int GetHitPoints()
+        {
+            return this.character.GetHitPoints() + hitPointIncrease;
         }
 
         public override void ReactToObservation(ICharacter character)
