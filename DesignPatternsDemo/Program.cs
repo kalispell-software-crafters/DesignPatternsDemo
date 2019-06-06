@@ -20,6 +20,10 @@ namespace DesignPatternsDemo
             UpgradeCharacter(party, CharacterType.Healer, characterUpgradeFactory);
             ListAllCharaters(party, enemies, "Upgraded list of characters.");
 
+            AttackCharacter(party, CharacterType.Warrior, 90);
+            AttackCharacter(party, CharacterType.Archer, 60);
+            ListAllCharaters(party, enemies, "Modified list of characters.");
+
             Console.WriteLine("Press enter to quit.");
             Console.ReadLine();
         }
@@ -27,9 +31,16 @@ namespace DesignPatternsDemo
         static List<ICharacter> CreateParty(ICharacterFactory characterFactory)
         {           
             List<ICharacter> party = new List<ICharacter>();
-            party.Add(characterFactory.CreateCharacter(CharacterType.Archer));
-            party.Add(characterFactory.CreateCharacter(CharacterType.Warrior));
-            party.Add(characterFactory.CreateCharacter(CharacterType.Healer));
+            ICharacter healer = characterFactory.CreateCharacter(CharacterType.Healer);
+            ICharacter warrior = characterFactory.CreateCharacter(CharacterType.Warrior);
+            ICharacter archer = characterFactory.CreateCharacter(CharacterType.Archer);
+            archer.AddObserver(healer);
+            warrior.AddObserver(healer);
+            healer.AddObserver(healer);
+            party.Add(archer);
+            party.Add(warrior);
+            party.Add(healer);
+
             return party;
         }
 
@@ -59,19 +70,28 @@ namespace DesignPatternsDemo
         static void GetCharacterOverview(ICharacter character)
         {
             Console.WriteLine($"Name: {character.GetName()}");
-            Console.WriteLine($"HP: {character.GetHitPoints()}");
+            Console.WriteLine($"Base HP: {character.GetBaseHitPoints()}");
+            Console.WriteLine($"Current HP: {character.GetHitPoints()}");
             Console.WriteLine($"Type: {character.GetCharacterType()}");
             character.UseSpecialPower();
             Console.WriteLine();
         }
 
-
-        static void UpgradeCharacter(List<ICharacter> characters, CharacterType type, ICharacterUpgradeFactory upgradeFactory)
+        static void UpgradeCharacter(List<ICharacter> characters, CharacterType characterType, ICharacterUpgradeFactory upgradeFactory)
         {
-            ICharacter toUpgrade = characters.First(character => character.GetCharacterType() == type);
-            ICharacter upgraded = upgradeFactory.UpgradeCharacter(toUpgrade);
-            characters.Remove(toUpgrade);
-            characters.Add(upgraded);
+            ICharacter characterToUpgrade = characters.First(character => character.GetCharacterType() == characterType);
+            ICharacter upgradedCharacter = upgradeFactory.UpgradeCharacter(characterToUpgrade);
+            characters.Remove(characterToUpgrade);
+            characters.Add(upgradedCharacter);
+        }
+
+        static void AttackCharacter(List<ICharacter> characters, CharacterType characterType, int damageToInflict)
+        {
+            ICharacter characterToAttack = characters.First(character => character.GetCharacterType() == characterType);
+            var remainingHitPoints = characterToAttack.GetHitPoints() - damageToInflict;
+            Console.WriteLine($"The {characterType} is attacked for {damageToInflict} damage! HP: {remainingHitPoints}");
+            characterToAttack.ReceiveDamage(damageToInflict);
+            Console.WriteLine($"{characterType}'s HP: {characterToAttack.GetHitPoints()} \n");
         }
     }
 }

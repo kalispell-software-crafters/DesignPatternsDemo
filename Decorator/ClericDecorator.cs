@@ -3,35 +3,35 @@ using Interfaces;
 
 namespace Decorator
 {
-    public class ClericDecorator : ICharacter
+    public class ClericDecorator : BaseCharacter
     {
         private ICharacter character;
-        private CharacterType characterType;
+        private readonly int hitPointIncrease = 25;
 
-        public ClericDecorator(ICharacter character)
+        public ClericDecorator(ICharacter character) : base(character.GetBaseHitPoints(), character.GetName())
         {
             this.character = character;
             this.characterType = CharacterType.Cleric;
         }
 
-        public CharacterType GetCharacterType()
+        public override int GetBaseHitPoints()
         {
-            return characterType;
+            return this.character.GetBaseHitPoints() + hitPointIncrease;
         }
 
-        public int GetHitPoints()
+        public override int GetHitPoints()
         {
-            return this.character.GetHitPoints() + 25;
+            return this.character.GetHitPoints() + hitPointIncrease;
         }
 
-        public string GetName()
+        public override void ReactToObservation(ICharacter character)
         {
-            return this.character.GetName();
         }
 
-        public void UseSpecialPower()
+        public override void UseSpecialPower()
         {
             Console.WriteLine("The Cleric uses their healing magic on all of the party members.");
+            this.character.UseSpecialPower();
         }
     }
 }

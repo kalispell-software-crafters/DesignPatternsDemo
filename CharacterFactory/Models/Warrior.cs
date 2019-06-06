@@ -10,6 +10,11 @@ namespace Factory.Models
             this.characterType = CharacterType.Warrior;
         }
 
+        public override void ReactToObservation(ICharacter character)
+        {
+
+        }
+
         public override void UseSpecialPower()
         {
             Console.WriteLine("The Warrior charges the enemy.");
