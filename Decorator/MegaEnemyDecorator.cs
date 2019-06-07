@@ -3,30 +3,17 @@ using Interfaces;
 
 namespace Decorator
 {
-    public class MegaEnemyDecorator : BaseCharacter
+    public class MegaEnemyDecorator : BaseCharacterDecorator
     {
-        private ICharacter character;
-        private readonly int hitPointIncrease = 65;
-
-        public MegaEnemyDecorator(ICharacter character) : base(character.GetBaseHitPoints(), character.GetName())
+        public MegaEnemyDecorator(ICharacter character) : base(character)
         {
-            this.character = character;
+            this.hitPointIncrease = 65;
             this.characterType = CharacterType.MegaEnemy;
-        }
-
-        public override int GetBaseHitPoints()
-        {
-            return this.character.GetBaseHitPoints() + hitPointIncrease;
-        }
-
-        public override int GetHitPoints()
-        {
-            return this.character.GetHitPoints() + hitPointIncrease;
         }
 
         public override void ReactToObservation(ICharacter character)
         {
-
+            this.character.ReactToObservation(character);
         }
 
         public override void UseSpecialPower()

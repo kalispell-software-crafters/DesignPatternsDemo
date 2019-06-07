@@ -3,30 +3,17 @@ using Interfaces;
 
 namespace Decorator
 {
-    public class CrossBowDecorator : BaseCharacter
+    public class CrossBowDecorator : BaseCharacterDecorator
     {
-        private ICharacter character;
-        private readonly int hitPointIncrease = 30;
-
-        public CrossBowDecorator(ICharacter character) : base(character.GetBaseHitPoints(), character.GetName())
+        public CrossBowDecorator(ICharacter character) : base(character)
         {
-            this.character = character;
+            this.hitPointIncrease = 30;
             this.characterType = CharacterType.CrossBow;
-        }
-
-        public override int GetBaseHitPoints()
-        {
-            return this.character.GetBaseHitPoints() + hitPointIncrease;
-        }
-
-        public override int GetHitPoints()
-        {
-            return this.character.GetHitPoints() + hitPointIncrease;
         }
 
         public override void ReactToObservation(ICharacter character)
         {
-
+            this.character.ReactToObservation(character);
         }
 
         public override void UseSpecialPower()

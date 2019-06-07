@@ -3,29 +3,17 @@ using Interfaces;
 
 namespace Decorator
 {
-    public class ClericDecorator : BaseCharacter
+    public class ClericDecorator : BaseCharacterDecorator 
     {
-        private ICharacter character;
-        private readonly int hitPointIncrease = 25;
-
-        public ClericDecorator(ICharacter character) : base(character.GetBaseHitPoints(), character.GetName())
+        public ClericDecorator(ICharacter character) : base(character)
         {
-            this.character = character;
+            this.hitPointIncrease = 25;
             this.characterType = CharacterType.Cleric;
-        }
-
-        public override int GetBaseHitPoints()
-        {
-            return this.character.GetBaseHitPoints() + hitPointIncrease;
-        }
-
-        public override int GetHitPoints()
-        {
-            return this.character.GetHitPoints() + hitPointIncrease;
         }
 
         public override void ReactToObservation(ICharacter character)
         {
+            this.character.ReactToObservation(character);
         }
 
         public override void UseSpecialPower()

@@ -3,30 +3,17 @@ using Interfaces;
 
 namespace Decorator
 {
-    public class KnightDecorator : BaseCharacter
+    public class KnightDecorator : BaseCharacterDecorator
     {
-        private ICharacter character;
-        private readonly int hitPointIncrease = 50;
-
-        public KnightDecorator(ICharacter character) : base(character.GetBaseHitPoints(), character.GetName())
+        public KnightDecorator(ICharacter character) : base(character)
         {
-            this.character = character;
+            this.hitPointIncrease = 50;
             this.characterType = CharacterType.Knight;
-        }
-
-        public override int GetBaseHitPoints()
-        {
-            return this.character.GetBaseHitPoints() + hitPointIncrease;
-        }
-
-        public override int GetHitPoints()
-        {
-            return this.character.GetHitPoints() + hitPointIncrease;
         }
 
         public override void ReactToObservation(ICharacter character)
         {
-
+            this.character.ReactToObservation(character);
         }
 
         public override void UseSpecialPower()
