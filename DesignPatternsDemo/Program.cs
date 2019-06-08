@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Decorator;
 using Factory;
+using Factory.Models;
 using Interfaces;
 
 namespace DesignPatternsDemo
@@ -23,6 +25,9 @@ namespace DesignPatternsDemo
             AttackCharacter(party, CharacterType.Warrior, 90);
             AttackCharacter(party, CharacterType.Archer, 60);
             ListAllCharaters(party, enemies, "Modified list of characters.");
+
+            ICharacter omniCharacter = new ClericDecorator(new CrossBowDecorator(new KnightDecorator(new Warrior(30, "Omni"))));
+            GetCharacterOverview(omniCharacter);
 
             Console.WriteLine("Press enter to quit.");
             Console.ReadLine();
@@ -81,8 +86,26 @@ namespace DesignPatternsDemo
         {
             ICharacter characterToUpgrade = characters.First(character => character.GetCharacterType() == characterType);
             ICharacter upgradedCharacter = upgradeFactory.UpgradeCharacter(characterToUpgrade);
+            RemoveObserver(characters, characterToUpgrade);
             characters.Remove(characterToUpgrade);
             characters.Add(upgradedCharacter);
+            AddObserver(characters, upgradedCharacter);
+        }
+
+        static void RemoveObserver(List<ICharacter> characters, ICharacter characterToRemove)
+        {
+            foreach(ICharacter character in characters)
+            {
+                character.RemoveObserver(characterToRemove);
+            }
+        }
+
+        static void AddObserver(List<ICharacter> characters, ICharacter characterToAdd)
+        {
+            foreach (ICharacter character in characters)
+            {
+                character.AddObserver(characterToAdd);
+            }
         }
 
         static void AttackCharacter(List<ICharacter> characters, CharacterType characterType, int damageToInflict)
