@@ -29,7 +29,8 @@ namespace Interfaces
 
         public virtual void SetHitPoints(int hitPoints)
         {
-            this.currentHitPoints = hitPoints;
+            var newHitPoints = hitPoints > this.baseHitPoints ? this.baseHitPoints : hitPoints;
+            this.currentHitPoints = newHitPoints;
         }
 
         public virtual int GetBaseHitPoints()

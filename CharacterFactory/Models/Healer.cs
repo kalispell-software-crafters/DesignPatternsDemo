@@ -23,9 +23,11 @@ namespace Factory.Models
             int currentHitPoints = character.GetHitPoints();
             if (currentHitPoints <= hitPointThreshold)
             {
-                int healedHitPoints = currentHitPoints + hitPointsToHeal;
-                character.SetHitPoints(healedHitPoints);
-                Console.WriteLine($"{this.GetName()} healed {character.GetName()} {hitPointsToHeal} HP! From {currentHitPoints} to {healedHitPoints}!");
+                var healedHitPoints = currentHitPoints + hitPointsToHeal;
+                var baseHitPoints = character.GetBaseHitPoints();
+                var newHitPoints = healedHitPoints > baseHitPoints ? baseHitPoints : healedHitPoints;
+                character.SetHitPoints(newHitPoints);
+                Console.WriteLine($"{this.GetName()} healed {character.GetName()} {hitPointsToHeal} HP! From {currentHitPoints} to {newHitPoints}!");
             }
         }
     }
