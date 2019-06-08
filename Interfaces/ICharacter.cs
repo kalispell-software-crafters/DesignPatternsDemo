@@ -1,19 +1,15 @@
 ﻿namespace Interfaces
 {
-    public interface ICharacter
+    public interface ICharacter : IObserver, ISubject
     {
+        CharacterType GetCharacterType(); 
+        string GetName();
+
         int GetBaseHitPoints();
         int GetHitPoints();
         void SetHitPoints(int hitPoints);
         void ReceiveDamage(int damageAmount);
 
-        string GetName();
-        CharacterType GetCharacterType(); 
         void UseSpecialPower();
-
-        void AddObserver(ICharacter character);
-        void RemoveObserver(ICharacter character);
-        void NotifyObservers();
-        void ReactToObservation(ICharacter character);
     }
 }

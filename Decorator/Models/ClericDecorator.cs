@@ -1,26 +1,28 @@
 ﻿using System;
 using Interfaces;
 
-namespace Factory.Models
+namespace Decorator.Models
 {
-    public class Healer : BaseCharacter
+    public class ClericDecorator : BaseCharacterDecorator 
     {
-        private readonly int hitPointsToHeal = 40;
-        private readonly int hitPointThreshold = 50;
+        private readonly int hitPointsToHeal = 80;
+        private readonly int hitPointThreshold = 70;
 
-        public Healer(int hitPoints, string name) : base(hitPoints, name)
+        public ClericDecorator(ICharacter character) : base(character)
         {
-            this.characterType = CharacterType.Healer;
+            this.hitPointIncrease = 25;
+            this.characterType = CharacterType.Cleric;
         }
 
         public override void UseSpecialPower()
         {
-            Console.WriteLine("The Healer fully heals one party member.");
+            Console.WriteLine("The Cleric uses their healing magic on all of the party members.");
+            this.character.UseSpecialPower();
         }
 
-        public override void ReactToObservation(ICharacter character) 
+        public override void ReactToObservation(ICharacter character)
         {
-            int currentHitPoints = character.GetHitPoints();
+            var currentHitPoints = character.GetHitPoints();
             if (currentHitPoints <= hitPointThreshold)
             {
                 var healedHitPoints = currentHitPoints + hitPointsToHeal;
@@ -29,6 +31,7 @@ namespace Factory.Models
                 character.SetHitPoints(newHitPoints);
                 Console.WriteLine($"{this.GetName()} healed {character.GetName()} {hitPointsToHeal} HP! From {currentHitPoints} to {newHitPoints}!");
             }
+            this.character.ReactToObservation(character);
         }
     }
 }

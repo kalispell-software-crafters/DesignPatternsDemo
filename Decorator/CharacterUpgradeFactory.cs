@@ -1,7 +1,7 @@
-﻿using Decorator;
+﻿using Decorator.Models;
 using Interfaces;
 
-namespace Factory 
+namespace Decorator
 {
     public class CharacterUpgradeFactory : ICharacterUpgradeFactory
     {

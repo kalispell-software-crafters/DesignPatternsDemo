@@ -10,14 +10,14 @@ namespace Factory.Models
             this.characterType = CharacterType.Archer;
         }
 
-        public override void ReactToObservation(ICharacter character)
-        {
-
-        }
-
         public override void UseSpecialPower()
         {
             Console.WriteLine("The Archer steadies their aim for the perfect shot.");
+        }
+
+        public override void ReactToObservation(ICharacter character)
+        {
+
         }
     }
 }
