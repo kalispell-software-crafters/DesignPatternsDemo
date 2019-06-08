@@ -2,13 +2,14 @@
 {
     public interface ICharacter : IObserver, ISubject
     {
+        CharacterType GetCharacterType(); 
+        string GetName();
+
         int GetBaseHitPoints();
         int GetHitPoints();
         void SetHitPoints(int hitPoints);
         void ReceiveDamage(int damageAmount);
 
-        string GetName();
-        CharacterType GetCharacterType();
         void UseSpecialPower();
     }
 }

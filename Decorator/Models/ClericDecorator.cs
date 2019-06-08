@@ -1,7 +1,7 @@
 ﻿using System;
 using Interfaces;
 
-namespace Decorator
+namespace Decorator.Models
 {
     public class ClericDecorator : BaseCharacterDecorator 
     {
@@ -12,6 +12,12 @@ namespace Decorator
         {
             this.hitPointIncrease = 25;
             this.characterType = CharacterType.Cleric;
+        }
+
+        public override void UseSpecialPower()
+        {
+            Console.WriteLine("The Cleric uses their healing magic on all of the party members.");
+            this.character.UseSpecialPower();
         }
 
         public override void ReactToObservation(ICharacter character)
@@ -26,12 +32,6 @@ namespace Decorator
                 Console.WriteLine($"{this.GetName()} healed {character.GetName()} {hitPointsToHeal} HP! From {currentHitPoints} to {newHitPoints}!");
             }
             this.character.ReactToObservation(character);
-        }
-
-        public override void UseSpecialPower()
-        {
-            Console.WriteLine("The Cleric uses their healing magic on all of the party members.");
-            this.character.UseSpecialPower();
         }
     }
 }

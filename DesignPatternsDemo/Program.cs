@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Decorator;
+using Decorator.Models;
 using Factory;
 using Factory.Models;
 using Interfaces;
@@ -36,12 +37,15 @@ namespace DesignPatternsDemo
         static List<ICharacter> CreateParty(ICharacterFactory characterFactory)
         {           
             List<ICharacter> party = new List<ICharacter>();
+
             ICharacter healer = characterFactory.CreateCharacter(CharacterType.Healer);
             ICharacter warrior = characterFactory.CreateCharacter(CharacterType.Warrior);
             ICharacter archer = characterFactory.CreateCharacter(CharacterType.Archer);
+
             archer.AddObserver(healer);
             warrior.AddObserver(healer);
             healer.AddObserver(healer);
+
             party.Add(archer);
             party.Add(warrior);
             party.Add(healer);
@@ -51,8 +55,11 @@ namespace DesignPatternsDemo
 
         static List<ICharacter> CreateEnemyParty(ICharacterFactory characterFactory)
         {
-            List<ICharacter> party = new List<ICharacter>();
-            party.Add(characterFactory.CreateCharacter(CharacterType.Enemy));
+            List<ICharacter> party = new List<ICharacter>
+            {
+                characterFactory.CreateCharacter(CharacterType.Enemy)
+            };
+
             return party;
         }
 
@@ -69,6 +76,7 @@ namespace DesignPatternsDemo
             {
                 GetCharacterOverview(character);
             }
+
             Console.WriteLine();
         }
 
@@ -86,8 +94,10 @@ namespace DesignPatternsDemo
         {
             ICharacter characterToUpgrade = characters.First(character => character.GetCharacterType() == characterType);
             ICharacter upgradedCharacter = upgradeFactory.UpgradeCharacter(characterToUpgrade);
+
             RemoveObserver(characters, characterToUpgrade);
             characters.Remove(characterToUpgrade);
+
             characters.Add(upgradedCharacter);
             AddObserver(characters, upgradedCharacter);
         }
@@ -112,6 +122,7 @@ namespace DesignPatternsDemo
         {
             ICharacter characterToAttack = characters.First(character => character.GetCharacterType() == characterType);
             var remainingHitPoints = characterToAttack.GetHitPoints() - damageToInflict;
+
             Console.WriteLine($"The {characterType} is attacked for {damageToInflict} damage! HP: {remainingHitPoints}");
             characterToAttack.ReceiveDamage(damageToInflict);
             Console.WriteLine($"{characterType}'s HP: {characterToAttack.GetHitPoints()} \n");

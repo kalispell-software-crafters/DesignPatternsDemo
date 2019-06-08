@@ -10,14 +10,14 @@ namespace Factory.Models
             this.characterType = CharacterType.Enemy;
         }
 
-        public override void ReactToObservation(ICharacter character)
-        {
-
-        }
-
         public override void UseSpecialPower()
         {
             Console.WriteLine("The Enemy attacks two of the party members.");
+        }
+
+        public override void ReactToObservation(ICharacter character)
+        {
+
         }
     }
 }
